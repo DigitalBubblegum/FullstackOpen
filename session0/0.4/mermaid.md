@@ -6,8 +6,10 @@ sequenceDiagram
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
     server-->> browser: HTTP status code 302
-    Note left of server: This is a URL redirect, to the /notes So, the browser reloads the Notes page.
     deactivate server
+    Note left of server: This is a URL redirect, to the /notes So, the browser reloads the Notes page.
+    
+
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
     server-->>browser: HTML document
