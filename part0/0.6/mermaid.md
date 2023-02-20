@@ -27,8 +27,8 @@ sequenceDiagram
 
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
     activate server
-    server-->>browser: [{note created}]
+    server-->>browser: [{message:"note created"}]
     deactivate server  
 
-    Note left of server: The spa.js has functions to render the newly added notes without the need to reload the whole html page      
+    Note left of server: The spa.js has functions to render the newly added notes without the need to reload the whole html      
 ```
