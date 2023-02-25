@@ -1,3 +1,12 @@
+const Hello = () => {
+  return (
+    <div>
+      <p>
+        This is a second component. 
+      </p>
+    </div>
+  )
+}
 const App = () => {
   const now = new Date()
   const a = 10
@@ -5,8 +14,13 @@ const App = () => {
   console.log(now,a+b)
   return (
     <div>
-      <p>Hello world, it is {now.toString()}</p>
-      <p>{a} plus {b} equals {a+b} </p>
+      <h1> This is the first component</h1>
+      <h2>
+        <Hello />
+      </h2>
+      <Hello />
+      <Hello />
+      <Hello />
     </div>
   )
 }
