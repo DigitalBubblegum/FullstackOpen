@@ -10,17 +10,19 @@ const Hello = ({ name, age }) => {
   )
 }
 
-const App = () => {
+const App = (props) => {
+  const {counter} = props
   const name = 'Peter'
   const age = 24
 
 
   return (
+    <><div>{counter}</div>
     <div>
       <h1>Greetings</h1>
       <Hello name="Maya" age={26 + 10} />
       <Hello name={name} age={age} />
-    </div>
+    </div></>
   )
 }
 
