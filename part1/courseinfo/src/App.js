@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 const Hello = ({ name, age }) => {
   const bornYear = () => new Date().getFullYear() - age
   return (
@@ -11,7 +13,13 @@ const Hello = ({ name, age }) => {
 }
 
 const App = (props) => {
-  const {counter} = props
+  const [counter, setCounter] = useState(10)
+
+setTimeout(
+  () => setCounter(counter+1),
+  1000
+)
+console.log('rendering...', counter)
   const name = 'Peter'
   const age = 24
 
