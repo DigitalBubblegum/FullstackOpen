@@ -13,13 +13,8 @@ const Hello = ({ name, age }) => {
 }
 
 const App = (props) => {
-  const [counter, setCounter] = useState(10)
+  const [counter, setCounter] = useState(0)
 
-setTimeout(
-  () => setCounter(counter+1),
-  1000
-)
-console.log('rendering...', counter)
   const name = 'Peter'
   const age = 24
 
@@ -27,6 +22,12 @@ console.log('rendering...', counter)
   return (
     <><div>{counter}</div>
     <div>
+      <button onClick={() => setCounter(counter+1)}>
+        add count
+      </button>
+      <button onClick={() => setCounter(0)}> 
+        reset
+      </button>
       <h1>Greetings</h1>
       <Hello name="Maya" age={26 + 10} />
       <Hello name={name} age={age} />
