@@ -12,22 +12,34 @@ const Hello = ({ name, age }) => {
   )
 }
 
+const Display = ({ counter }) => {
+  console.log('Display Component is working here')
+  return (<div> {counter}</div>)
+}
+
+const Button = ({handleClick, text}) => {
+  console.log('button component is working here')
+  return(<button onClick={ handleClick }>
+        {text}
+      </button>)
+}
+
 const App = (props) => {
   const [counter, setCounter] = useState(0)
-
+  const increaseByOne = () => setCounter( counter + 1 )
+  const decreaseByOne = () => setCounter( counter - 1 )
+  const setToZero = () => setCounter(0)
   const name = 'Peter'
   const age = 24
 
 
   return (
-    <><div>{counter}</div>
+    <>
+    <Display counter = {counter} />
     <div>
-      <button onClick={() => setCounter(counter+1)}>
-        add count
-      </button>
-      <button onClick={() => setCounter(0)}> 
-        reset
-      </button>
+      <Button handleClick = {setToZero} text = "reset"/>
+      <Button handleClick = {increaseByOne} text = "plus 1 "/>
+      <Button handleClick = {decreaseByOne} text = "minus 1"/>
       <h1>Greetings</h1>
       <Hello name="Maya" age={26 + 10} />
       <Hello name={name} age={age} />
