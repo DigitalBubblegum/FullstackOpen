@@ -6,16 +6,16 @@ const App = () => {
   })
   const[comp, setComp] = useState('not compared yet')
   const handleLeftClick = () => {
-    const newClicks = { 
-      left: clicks.left + 1, 
-      right: clicks.right 
+    const newClicks = {
+      ...clicks, 
+      left: clicks.left + 1,
     }
     setClicks(newClicks)
   }
 
   const handleRightClick = () => {
-    const newClicks = { 
-      left: clicks.left, 
+    const newClicks = {
+      ...clicks,  
       right: clicks.right + 1 
     }
     setClicks(newClicks)
@@ -53,7 +53,6 @@ const App = () => {
       </>
     </p>
     </>
-    
   )
 }
 export default App
