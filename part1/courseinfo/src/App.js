@@ -1,50 +1,39 @@
 import { useState } from "react"
 
-const Hello = ({ name, age }) => {
-  const bornYear = () => new Date().getFullYear() - age
-  return (
-    <div>
-      <p>
-        Hello {name}, you are {age} years old
-      </p>
-      <p>you are probably born in {bornYear()}</p>
-    </div>
-  )
-}
-
-const Display = ({ counter }) => {
-  console.log('Display Component is working here')
-  return (<div> {counter}</div>)
-}
-
-const Button = ({handleClick, text}) => {
-  console.log('button component is working here')
-  return(<button onClick={ handleClick }>
-        {text}
-      </button>)
-}
-
-const App = (props) => {
-  const [counter, setCounter] = useState(0)
-  const increaseByOne = () => setCounter( counter + 1 )
-  const decreaseByOne = () => setCounter( counter - 1 )
-  const setToZero = () => setCounter(0)
-  const name = 'Peter'
-  const age = 24
-
-
+const App = () => {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [comp, setComp] = useState('You have not yet clicked to compare')
+  const compareValues = () => {
+    if (left>right) {
+      console.log('left is greater')
+      return(<>Left is greater than right</>)
+    }
+    else if (right > left) {
+      console.log('right is greater')
+      return(<>Right is greater than left</>)
+    } 
+    else {
+      console.log('they are equal')
+      return(<>They are equal</>)
+    }
+  }
   return (
     <>
-    <Display counter = {counter} />
-    <div>
-      <Button handleClick = {setToZero} text = "reset"/>
-      <Button handleClick = {increaseByOne} text = "plus 1 "/>
-      <Button handleClick = {decreaseByOne} text = "minus 1"/>
-      <h1>Greetings</h1>
-      <Hello name="Maya" age={26 + 10} />
-      <Hello name={name} age={age} />
-    </div></>
+      <div>
+        {left}
+        <button onClick={() => setLeft(left + 1)}>
+        left
+        </button>
+        <button onClick={() => setRight(right + 1)}>
+        right
+        </button>
+      {right}
+    </div>
+    <button onClick={() => setComp(compareValues)}>Click to compare</button>
+    <p><>{comp}</></p>
+    </>
+    
   )
 }
-
 export default App
