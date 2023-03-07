@@ -5,11 +5,13 @@ const App = () => {
     left: 0, right: 0
   })
   const[comp, setComp] = useState('not compared yet')
+  const [allClicks, setAll] = useState([])
   const handleLeftClick = () => {
     const newClicks = {
       ...clicks, 
       left: clicks.left + 1,
     }
+    setAll(allClicks.concat('L'))
     setClicks(newClicks)
   }
 
@@ -18,6 +20,7 @@ const App = () => {
       ...clicks,  
       right: clicks.right + 1 
     }
+    setAll(allClicks.concat('R'))
     setClicks(newClicks)
   }
 
@@ -35,9 +38,9 @@ const App = () => {
       console.log('they are equal')
       newComp = <>They are equal</>
     }
+    setAll(allClicks.concat('COMP'))
     setComp(newComp)
   }
-
   return (
     <>
     <div>
@@ -52,6 +55,7 @@ const App = () => {
       {comp}
       </>
     </p>
+    <p>{allClicks.join(' ')}</p>
     </>
   )
 }
