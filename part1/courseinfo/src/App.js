@@ -1,5 +1,23 @@
 import { useState } from "react"
-
+const History = (props) => {
+  if (props.allClicks.length === 0) {
+    return (
+      <div>
+        the app is used by pressing the buttons
+      </div>
+    )
+  }
+  return (
+    <div>
+      button press history: {props.allClicks.join(' ')}
+    </div>
+  )
+}
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
+    {text}
+  </button>
+)
 const App = () => {
   //states
   const [clicks, setClicks] = useState({
@@ -57,8 +75,8 @@ const App = () => {
     <>
     <div>
       {clicks.left}
-      <button onClick={handleLeftClick}>left</button>
-      <button onClick={handleRightClick}>right</button>
+      <Button handleClick={handleLeftClick} text='left' />
+      <Button handleClick={handleRightClick} text='right' />
       {clicks.right}
     </div>
     <button onClick={handleCompClick}>compare the values</button>
@@ -67,7 +85,7 @@ const App = () => {
       {comp}
       </>
     </p>
-    <p>{allClicks.join(' ')}</p>
+    <History allClicks = {allClicks}/>
     <p>total clicks = {total} </p>
     </>
   )
