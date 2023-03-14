@@ -1,18 +1,26 @@
 import { useState } from "react"
 
 const App = () => {
+  //states
   const [clicks, setClicks] = useState({
     left: 0, right: 0
   })
   const[comp, setComp] = useState('not compared yet')
   const [allClicks, setAll] = useState([])
+  const [total, setTotal] = useState(0)
+
+  //functions
   const handleLeftClick = () => {
     const newClicks = {
       ...clicks, 
       left: clicks.left + 1,
     }
     setAll(allClicks.concat('L'))
+    const updatedLeft = clicks.left + 1
+    console.log('left before', clicks.left)
     setClicks(newClicks)
+    console.log('left after', updatedLeft)
+    setTotal(updatedLeft + clicks.right)
   }
 
   const handleRightClick = () => {
@@ -21,7 +29,11 @@ const App = () => {
       right: clicks.right + 1 
     }
     setAll(allClicks.concat('R'))
+    const updatedRight = clicks.right + 1
+    console.log('right before', clicks.right)
     setClicks(newClicks)
+    console.log('right after', updatedRight)
+    setTotal(clicks.left + updatedRight)
   }
 
   const handleCompClick = () => {
@@ -56,6 +68,7 @@ const App = () => {
       </>
     </p>
     <p>{allClicks.join(' ')}</p>
+    <p>total clicks = {total} </p>
     </>
   )
 }
