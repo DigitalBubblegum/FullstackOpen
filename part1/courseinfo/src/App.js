@@ -58,11 +58,11 @@ const App = () => {
     let newComp = ''
     if (clicks.left>clicks.right) {
       console.log('left is greater')
-      newComp = <>Left is greater than right</>
+      newComp = 'Left is greater than right'
     }
     else if (clicks.right > clicks.left) {
       console.log('right is greater')
-      newComp = <>Right is greater than left</>
+      newComp = 'Right is greater than left'
     } 
     else {
       console.log('they are equal')
