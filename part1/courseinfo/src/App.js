@@ -26,6 +26,7 @@ const App = () => {
   const[comp, setComp] = useState('not compared yet')
   const [allClicks, setAll] = useState([])
   const [total, setTotal] = useState(0)
+  const [value, setValue] = useState(0)
 
   //functions
   const handleLeftClick = () => {
@@ -71,6 +72,10 @@ const App = () => {
     setAll(allClicks.concat('COMP'))
     setComp(newComp)
   }
+  const setToValue = (newValue) => {
+    console.log('value now', newValue)
+    setValue(newValue)
+  }
   return (
     <>
     <div>
@@ -87,6 +92,18 @@ const App = () => {
     </p>
     <History allClicks = {allClicks}/>
     <p>total clicks = {total} </p>
+    <div>
+      {value}
+      <button onClick={() => setToValue(1000)}>
+        thousand
+      </button>
+      <button onClick={() => setToValue(0)}>
+        reset
+      </button>
+      <button onClick={() => setToValue(value + 1)}>
+        increment
+      </button>
+    </div>
     </>
   )
 }
