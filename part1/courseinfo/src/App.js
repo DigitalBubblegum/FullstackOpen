@@ -18,6 +18,7 @@ const Button = ({ handleClick, text }) => (
     {text}
   </button>
 )
+const Display = ({value}) => <div>{value}</div>
 const App = () => {
   //states
   const [clicks, setClicks] = useState({
@@ -93,7 +94,7 @@ const App = () => {
     <History allClicks = {allClicks}/>
     <p>total clicks = {total} </p>
     <div>
-      {value}
+      <Display value = {value}/>
       <Button handleClick={() => setToValue(1000)} text="thousand" />
       <Button handleClick={() => setToValue(0)} text="reset" />
       <Button handleClick={() => setToValue(value + 1)} text="increment" />
