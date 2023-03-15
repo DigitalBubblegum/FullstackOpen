@@ -2,37 +2,68 @@ import { useState } from 'react'
 const Button = ({handleClick,text}) => {
   return (<button onClick={handleClick}>{text}</button>)
 }
+const All = ({all}) => <>all {all}<br/></>
+const Avg = ({average}) => <>average {average}<br/></>
+const Pos = ({positive}) => <>positive {positive} %<br/></>
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+  const [all, setAll] = useState(0)
+  const [average, setAverage] = useState(0)
+  const [positive, setPositive] = useState(0)
   //functions
+
   const handleGood = () =>
   {
     let newGood = 0
-    console.log('good before',good)
+    let newAll = 0
+    let newAvg = 0 
+    let newPos = 0
     newGood = good + 1
-    console.log('good now', newGood)
+    newAll = newGood + bad + neutral
+    newAvg = (newGood - bad)/newAll
+    newPos = (newGood/newAll) * 100
     setGood(newGood)
+    setAll(newAll)
+    setAverage(newAvg)
+    setPositive(newPos)
+  }
+
+  const handleNeutral = () =>
+  {
+    let newNeutral = 0
+    let newAll = 0
+    let newAvg = 0 
+    let newPos = 0
+    newNeutral = neutral + 1
+    newAll = good + bad + newNeutral
+    newAvg = (good - bad) / newAll
+    newPos = (good/newAll) * 100
+    setNeutral(newNeutral)
+    setAll(newAll)
+    setAverage(newAvg)
+    setPositive(newPos)
   }
 
   const handleBad = () =>
   {
     let newBad = 0
-    console.log('bad before',bad)
+    let newAll = 0
+    let newAvg = 0
+    let newPos = 0 
     newBad = bad + 1
-    console.log('bad now', newBad)
+    newAll = good + newBad + neutral
+    newAvg = (good - newBad) / newAll
+    newPos = (good/newAll) * 100
     setBad(newBad)
+    setAll(newAll)
+    setAverage(newAvg)
+    setPositive(newPos)
   }
-    const handleNeutral = () =>
-  {
-    let newNeutral = 0
-    console.log('neutral before',neutral)
-    newNeutral = neutral + 1
-    console.log('neutral now', newNeutral)
-    setNeutral(newNeutral)
-  }
+
+
   return (
     <div>
       <h1>give feedback</h1>
@@ -43,6 +74,9 @@ const App = () => {
       good {good}<br/>
       neutral {neutral}<br/>
       bad {bad}<br/>
+      <All all = {all} />
+      <Avg average = {average} />
+      <Pos positive={positive} />
     </div>
   )
 }

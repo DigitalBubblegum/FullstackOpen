@@ -1,1 +1,1 @@
-# This is the repo for exercise 1.6 in FSO
+# This is the repo for exercise 1.6, 1.7 in FSO
