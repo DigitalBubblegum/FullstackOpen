@@ -7,12 +7,18 @@ const All = ({all}) => <>all {all}<br/></>
 const Avg = ({average}) => <>average {average}<br/></>
 const Pos = ({positive}) => <>positive {positive} %<br/></>
 const Statistics = ({all, average, positive}) => {
-  console.log('this is the render of the Statistics component')
-  return (<><All all = {all} />
+  if (all!==0){
+    return (<><All all = {all} />
       <Avg average = {average} />
       <Pos positive= {positive} />
       </>
   )
+  }
+  else{
+    return(
+      <p>No feedback given</p>
+    )
+  }
 }
 const App = () => {
   // save clicks of each button to its own state
