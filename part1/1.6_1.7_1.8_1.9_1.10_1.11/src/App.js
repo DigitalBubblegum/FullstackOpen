@@ -3,10 +3,9 @@ import { useState } from 'react'
 const Button = ({handleClick,text}) => {
   return (<button onClick={handleClick}>{text}</button>)
 }
-const All = ({all}) => <tr><td>all {all}<br/></td></tr>
-const Avg = ({average}) => <tr><td>average {average}<br/></td></tr>
-const Pos = ({positive}) => <tr><td>positive {positive} %<br/></td>
-</tr>
+const All = ({all}) => <tr><td>all</td> <td>{all}</td></tr>
+const Avg = ({average}) => <tr><td>average</td> <td> {average}</td></tr>
+const Pos = ({positive}) => <tr><td>positive</td> <td>{positive} %</td></tr>
 const Statistics = ({all, average, positive}) => {
   if (all!==0){
     return (<>
@@ -91,10 +90,13 @@ const App = () => {
       <Button handleClick = {handleNeutral} text ='neutral'/>
       <Button handleClick = {handleBad} text ='bad'/>
       <h1>statisics</h1>
+      <table>
       <tr><StatisticLine text = "good" value = {good}/></tr>
       <tr><StatisticLine text = "neutral" value = {neutral}/></tr>
       <tr><StatisticLine text = "bad" value = {bad}/></tr>
       <Statistics all = {all} average = {average} positive={positive} />
+      </table>
+
     </div>
   )
 }
