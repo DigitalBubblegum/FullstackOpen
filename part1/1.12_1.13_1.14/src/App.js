@@ -1,6 +1,7 @@
 import { useState } from 'react'
 const Anecdotes = ({anecdotes,selected}) => {
   return(<div>
+    <h1>Anecdote of the day</h1>
       {anecdotes[selected]}
     </div>)
 }
@@ -12,6 +13,19 @@ const Button = ({text,handleClick}) => {
 const Votes = ({points}) => {
   return(
     <p>has {points} votes</p>
+  )
+}
+const Leader = ({anecdotes,points}) =>{
+  console.log('leader is rendered')
+  const indexOfMax = points.indexOf(Math.max(...points));
+  console.log(indexOfMax);
+  return(
+    <div>
+    <h1>Anecdote with the most votes</h1>
+    {anecdotes[indexOfMax]}
+    <br/>
+    has {points[indexOfMax]} votes
+    </div>
   )
 }
 const App = () => {
@@ -53,6 +67,7 @@ const App = () => {
       <Votes points = {points[selected]}/>
       <Button text = 'new anecdote' handleClick = {()=>randomizer(0,anecdotes.length)}/>
       <Button text = 'vote' handleClick={()=>addVote()}/>
+      <Leader anecdotes = {anecdotes} points = {points}/>
     </div>
   )
 }
