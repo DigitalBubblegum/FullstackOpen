@@ -9,6 +9,11 @@ const Button = ({text,handleClick}) => {
     <button onClick={handleClick}>{text}</button>
   )
 }
+const Votes = ({points}) => {
+  return(
+    <p>has {points} votes</p>
+  )
+}
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -22,7 +27,17 @@ const App = () => {
   ]
   //state
   const [selected, setSelected] = useState(0)
+  const [points, setPoints] = useState([0,0,0,0,0,0,0,0])
   //functions
+  const addVote = () => {
+    let newScore = 0
+    const copy = [...points]
+    console.log(copy);
+    newScore = copy[selected] + 1
+    copy[selected] = newScore
+    console.log(copy);
+    setPoints(copy)
+  }
   const randomizer = (min, max) => {
   let rand = 0
   min = Math.ceil(min);
@@ -31,10 +46,13 @@ const App = () => {
   console.log(rand)
   setSelected(rand)
   }
+  console.log(selected);
   return (
     <div>
       <Anecdotes anecdotes = {anecdotes} selected = {selected} />
+      <Votes points = {points[selected]}/>
       <Button text = 'new anecdote' handleClick = {()=>randomizer(0,anecdotes.length)}/>
+      <Button text = 'vote' handleClick={()=>addVote()}/>
     </div>
   )
 }
