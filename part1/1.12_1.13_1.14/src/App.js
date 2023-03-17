@@ -20,6 +20,9 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]
+  //state
+  const [selected, setSelected] = useState(0)
+  //functions
   const randomizer = (min, max) => {
   let rand = 0
   min = Math.ceil(min);
@@ -28,7 +31,6 @@ const App = () => {
   console.log(rand)
   setSelected(rand)
   }
-  const [selected, setSelected] = useState(0)
   return (
     <div>
       <Anecdotes anecdotes = {anecdotes} selected = {selected} />
