@@ -1,49 +1,76 @@
-const Header = ({ course }) => <h1>{course}</h1>
-
-const Total = ({ sum }) => <p>Number of exercises {sum}</p>
-
-const Part = ({ part }) => 
-  <p>
-    {part.name} {part.exercises}
-  </p>
-
-const Content = ({ parts }) => 
-  <>
-    <Part
-      part={parts[0]} 
-    />
-    <Part
-      part={parts[1]} 
-    />
-    <Part
-      part={parts[2]} 
-    />      
-  </>
+const Header = (props) =>{
+  return (
+    <h1>{props.course}</h1>
+  )
+}
+const Content = ({course}) =>{
+  return (
+    <div>{course.parts.map(note => <p>{note.name} {note.exercises}</p>)}</div>  
+  )
+}
+const Course = ({course}) => {
+  console.log(course.parts.map(note => note.exercises));
+  console.log(course.parts.map(note => note.name));
+  return (<div>
+      <Header course={course.name} />
+      <Content course = {course} />
+      {/* <Total course ={course}/> */}
+    </div>)
+}
+const Total = ({course}) =>{
+  console.log('render');
+  console.log(course.parts.reduce((sum, number) => sum + number,0));
+  console.log('');
+  console.log(course.parts.map(note => note.exercises));
+  const total = course.parts.reduce((sum, note) => sum + note.exercises,0)
+  return (<p>{total}</p>
+  )
+}
 
 const App = () => {
-  const course = 'Half Stack application development'
-  const parts = [
-    {
-      name: 'Fundamentals of React',
-      exercises: 10
-    },
-    {
-      name: 'Using props to pass data',
-      exercises: 7
-    },
-    {
-      name: 'State of a component',
-      exercises: 14
-    }
-  ]
-
-  return (
-    <div>
-      <Header course={course} />
-      <Content parts={parts} />
-      <Total sum={parts[0].exercises + parts[1].exercises + parts[2].exercises} />
-    </div>
-  )
+  
+  const course = {
+    id: 1,
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10,
+        id: 1
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7,
+        id: 2
+      },
+      {
+        name: 'State of a component',
+        exercises: 14,
+        id: 3
+      },
+      {
+        name: 'Rendering a collection',
+        exercises: 14,
+        id: 4
+      },
+      {
+        name: 'JavaScript Arrays',
+        exercises: 14,
+        id: 5
+      },
+      {
+        name: 'Refactoring Modules',
+        exercises: 14,
+        id: 6
+      },
+      {
+        name: 'Map',
+        exercises: 14,
+        id: 7
+      }
+    ]
+  }
+  return (<Course course={course} />)
 }
 
 export default App
