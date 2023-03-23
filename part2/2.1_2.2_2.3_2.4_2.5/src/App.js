@@ -5,25 +5,19 @@ const Header = (props) =>{
 }
 const Content = ({course}) =>{
   return (
-    <div>{course.parts.map(note => <p>{note.name} {note.exercises}</p>)}</div>  
+    <div>{course.parts.map(note => <p key={note.id}>{note.name} {note.exercises}</p>)}</div>  
   )
 }
 const Course = ({course}) => {
-  console.log(course.parts.map(note => note.exercises));
-  console.log(course.parts.map(note => note.name));
   return (<div>
       <Header course={course.name} />
       <Content course = {course} />
-      {/* <Total course ={course}/> */}
+      <Total course ={course}/>
     </div>)
 }
 const Total = ({course}) =>{
-  console.log('render');
-  console.log(course.parts.reduce((sum, number) => sum + number,0));
-  console.log('');
-  console.log(course.parts.map(note => note.exercises));
   const total = course.parts.reduce((sum, note) => sum + note.exercises,0)
-  return (<p>{total}</p>
+  return (<b>total of {total} exercises</b>
   )
 }
 
@@ -57,16 +51,6 @@ const App = () => {
         name: 'JavaScript Arrays',
         exercises: 14,
         id: 5
-      },
-      {
-        name: 'Refactoring Modules',
-        exercises: 14,
-        id: 6
-      },
-      {
-        name: 'Map',
-        exercises: 14,
-        id: 7
       }
     ]
   }
