@@ -1,13 +1,10 @@
+import Content from "./components/Content"
 const Header = ({courses}) =>{
   return (
     <div><h1>Wed development curriculum</h1></div>
   )
 }
-const Content = ({courses}) =>{
-  return (
-    <div>{courses.map(course => <div> <h2> {course.name}</h2> {course.parts.map(part => <p>{part.name} {part.exercises} </p>)} <b>total of {course.parts.reduce((sum, note) => sum + note.exercises,0)} exercises</b></div>)}</div>  
-  )
-}
+
 const Course = ({courses}) => {
   return (<div>
       <Header courses={courses} />
