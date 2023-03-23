@@ -17,6 +17,7 @@ const Course = ({course}) => {
 }
 const Total = ({course}) =>{
   const total = course.parts.reduce((sum, note) => sum + note.exercises,0)
+  console.log(total);
   return (<b>total of {total} exercises</b>
   )
 }
