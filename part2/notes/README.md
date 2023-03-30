@@ -1,1 +1,1 @@
-# This is the course content for Part 2
+# This is the course content for Part 2 of FSO
