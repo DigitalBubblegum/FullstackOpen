@@ -5,11 +5,14 @@ const App = () => {
     { name: 'Arto Hellas' }
   ]) 
   const [newName, setNewName] = useState('')
-
+  //functions
+  const submitHandler = (event) =>{
+    event.preventDefault()
+  }
   return (
     <div>
       <h2>Phonebook</h2>
-      <form>
+      <form onSubmit={submitHandler}>
         <div>
           name: <input />
         </div>
