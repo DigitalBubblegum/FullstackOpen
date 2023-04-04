@@ -14,16 +14,29 @@ const App = () => {
   const [newName, setNewName] = useState('')
 
   //functions
+
   const addPerson = (event) =>{
     event.preventDefault()
-    console.log('button clicked');
-    const numberObject = {
-      id: persons.length + 1,
-      name: newName,
+    if (checkNameExists(newName) === false) {
+      console.log(persons.includes(newName));
+      console.log('button clicked');
+      const numberObject = {
+        id: persons.length + 1,
+        name: newName,
+      }
+      setPersons(persons.concat(numberObject))
+      setNewName('')
+    } else {
+      alert (`${newName} is already added to phonebook`)
+      setNewName('')
     }
-    setPersons(persons.concat(numberObject))
-    setNewName('')
   }
+
+  const checkNameExists = (nameToCheck) => {
+    const names = persons.map((person) => person.name)
+    return names.includes(nameToCheck)
+}
+
   const handleNameChange = (event) =>{
     console.log(event.target.value)
     setNewName(event.target.value)
