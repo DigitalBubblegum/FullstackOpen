@@ -1,23 +1,12 @@
 import { useState } from 'react'
+import Filter from "./components/Filter";
+import PersonForm from "./components/PersonForm";
+import Person from "./components/Person";
 
-const Person = ({persons}) => {
-  console.log(persons.map((person)=>person.name))
-  return(<ul>{persons.map((person)=><li key={person.id}>{person.name} - {person.phone}</li>)}
-  </ul>
-  )
-}
-const Filter = ({displayAll,displayFiltered,newFilter,handleFilterChange}) => {
-  return(
-    <div>
-      Filter <input value={newFilter} onChange={handleFilterChange}/>
-      <button onClick={displayFiltered}>Click to filter</button>
-      <button onClick={displayAll}> Click to showAll </button>
-    </div>
-  )
-}
 const App = () => {
+  //states
   const [persons, setPersons] = useState([
-    { id: 1, name: 'Arto Hellas', phone: '111111' },
+    {id: 1, name: 'Arto Hellas', phone: '111111' },
     {id: 2,name: 'Emma Johnson',phone: '222222'},
     {id: 3,name: 'Michael Chen',phone: '333333'},
     {id: 4,name: 'Sara Lee',phone: '444444'},
@@ -41,8 +30,12 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newPhone, setNewPhone] = useState('')
   const [newFilter, setNewFilter] = useState('')
-  const [originalPersons, setOriginalPersons] = useState(persons);
+  const [showAll, setShowAll] = useState(true)
+  
   //functions
+  const personsToShow = showAll
+    ? persons
+    : persons.filter(person => person.name.toLowerCase().includes(newFilter))
 
   const addPerson = (event) =>{
     event.preventDefault()
@@ -57,7 +50,6 @@ const App = () => {
       setPersons(persons.concat(numberObject))
       setNewName('')
       setNewPhone('')
-      setOriginalPersons([...persons, numberObject])
     } else {
       alert (`${newName} is already added to phonebook`)
       setNewName('')
@@ -65,17 +57,6 @@ const App = () => {
     }
   }
 
-  const displayFiltered = () => {
-  const copyPersons = [...persons]
-  console.log(newFilter);
-  const substring = newFilter.toLowerCase()
-  console.log(substring);
-  const filteredNames = copyPersons.filter((copyPerson) => copyPerson.name.toLowerCase().includes(substring));
-  console.log(filteredNames);
-  console.log(persons);
-  setPersons(filteredNames)
-  }
-  
   const checkNameExists = (nameToCheck) => {
     const names = persons.map((person) => person.name)
     return names.includes(nameToCheck)
@@ -89,34 +70,16 @@ const App = () => {
     console.log(event.target.value)
     setNewPhone(event.target.value)
   }
-
   const handleFilterChange  =(event) =>{
     console.log(event.target.value)
     setNewFilter(event.target.value)
   }
 
-const displayAll = () =>{
-  console.log(originalPersons);
-  setPersons(originalPersons)
-}
-
   return (
     <div>
-      <Filter displayAll ={displayAll} displayFiltered = {displayFiltered} newFilter = {newFilter} handleFilterChange = {handleFilterChange}/>
-      <h2>Phonebook</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input value={newName} onChange = {handleNameChange}/>
-        </div>
-        <div>
-          number: <input value = {newPhone} onChange={handlePhoneChange}/>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      <Person persons = {persons}/>
+      <Filter newFilter = {newFilter} handleFilterChange = {handleFilterChange} showAll = {showAll} setShowAll = {setShowAll}/>
+      <PersonForm addPerson = {addPerson} newName = {newName} handleNameChange = {handleNameChange} newPhone = {newPhone} handlePhoneChange = {handlePhoneChange}/>
+      <Person personsToShow = {personsToShow}/>
     </div>
   )
 }
