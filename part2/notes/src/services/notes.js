@@ -3,7 +3,12 @@ const baseUrl = 'http://localhost:3001/notes'
 
 const getAll = () => {
   const request = axios.get(baseUrl)
-  return request.then(response => response.data)
+  const nonExistant = {
+    id:10000,
+    content: 'this note is hardcoded',
+    important: true
+  }
+  return request.then(response => response.data.concat(nonExistant))
 }
 
 const create = newObject => {
@@ -16,10 +21,10 @@ const update = (id, newObject) => {
   return request.then(response => response.data)
 }
 
-const noteService = {
-    getAll: getAll,
-    create: create,
-    update: update
-}
+// const noteService = {
+//     getAll: getAll,
+//     create: create,
+//     update: update
+// }
 
-export default noteService;
+export default { getAll, create, update }
