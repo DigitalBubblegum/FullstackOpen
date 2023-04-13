@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Person from "./components/Person";
-import axios  from "axios";
+import communications from "./services/communications";
 const App = () => {
   //states
   const [persons, setPersons] = useState([]) 
@@ -13,10 +13,15 @@ const App = () => {
   //effects
   const hook = () => {
     console.log('effect');
-    axios.get('http://localhost:3001/persons')
-    .then(response => {
-      console.log('promise fulfilled');
-      setPersons(response.data)
+    // axios.get('http://localhost:3001/persons')
+    // .then(response => {
+    //   console.log('promise fulfilled');
+    //   setPersons(response.data)
+    // })
+    communications.getAll()
+    .then(response =>{
+      console.log(response);
+      setPersons(response)
     })
   }
   useEffect(hook,[])
@@ -35,9 +40,13 @@ const App = () => {
         name: newName,
         phone: newPhone,
       }
-      setPersons(persons.concat(numberObject))
-      setNewName('')
-      setNewPhone('')
+      communications.create(numberObject)
+      .then(returnedPerson => {
+        console.log('successfully created new entry in DB');
+        setPersons(persons.concat(returnedPerson))
+        setNewName('')
+        setNewPhone('')
+      })
     } else {
       alert (`${newName} is already added to phonebook`)
       setNewName('')
