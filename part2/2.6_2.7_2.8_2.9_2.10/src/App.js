@@ -66,12 +66,30 @@ const App = () => {
     console.log(event.target.value)
     setNewFilter(event.target.value)
   }
+  const handleDelete = (id,name) => {
+    if (window.confirm('are you sure you want to delete '+name)) {
+      console.log('confirm');
+      console.log('deleting the number'+id);
+      communications.remove(id)
+        .then(response =>{
+        console.log(response)
+      communications.getAll()
+        .then(response => {
+        console.log(response);
+        setPersons(response)
+        })
+      })
+    }
+    else{
+      console.log('denied');
+    }
 
+  }
   return (
     <div>
       <Filter newFilter = {newFilter} handleFilterChange = {handleFilterChange} showAll = {showAll} setShowAll = {setShowAll}/>
       <PersonForm addPerson = {addPerson} newName = {newName} handleNameChange = {handleNameChange} newPhone = {newPhone} handlePhoneChange = {handlePhoneChange}/>
-      <Person personsToShow = {personsToShow}/>
+      <Person personsToShow = {personsToShow} handleDelete = {handleDelete}/>
     </div>
   )
 }

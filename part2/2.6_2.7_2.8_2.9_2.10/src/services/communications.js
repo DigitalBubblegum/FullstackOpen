@@ -10,10 +10,15 @@ const create = newObject => {
     return axios.post(baseUrl,newObject)
     .then(response => response.data)
 }
+const remove = (id) => {
+    console.log(id);
+    return axios.delete(`${baseUrl}/${id}`)
+}
 
 const communications = {
     getAll,
-    create
+    create,
+    remove
 }
 
 export default communications
