@@ -31,7 +31,6 @@ const App = () => {
       console.log(persons.includes(newName));
       console.log('button clicked');
       const numberObject = {
-        id: persons.length + 1,
         name: newName,
         phone: newPhone,
       }
@@ -43,7 +42,31 @@ const App = () => {
         setNewPhone('')
       })
     } else {
-      alert (`${newName} is already added to phonebook`)
+      if (window.confirm (`${newName} is already added to phonebook do you want to modify the number`)) {
+        console.log('modifying the number');
+        // console.log(persons.map((person)=>person.name).findIndex(element => element === newName));
+        const ind = persons.map((person)=>person.name).findIndex(element => element === newName)
+        console.log(persons[ind].name);
+        console.log(persons[ind].id);
+        const id = persons[ind].id
+        // communications.modify(id)
+        // .then(response => console.log(response))
+        const phonenum = persons.find(person => person.id === id)
+        const changednum = {...phonenum,phone : newPhone}
+        communications.modify(id,changednum)
+        .then(response => {
+          setPersons(persons.map(person => person.id !== id ? person : response.data))
+        })
+        // communications.getAll()
+        // .then(response => {
+        // console.log(response);
+        // setPersons(response)
+        // })
+        // communications.modify(id)
+      }
+      else{
+        console.log('not confirm');
+      }
       setNewName('')
       setNewPhone('')
     }

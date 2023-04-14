@@ -1,5 +1,4 @@
 const Person = ({personsToShow,handleDelete}) => {
-  console.log(personsToShow.map((person)=>person.name))
   return(<div>
           <h2>Numbers</h2>
           <ol>

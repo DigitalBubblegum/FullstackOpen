@@ -14,11 +14,14 @@ const remove = (id) => {
     console.log(id);
     return axios.delete(`${baseUrl}/${id}`)
 }
-
+const modify = (id,changednum) => {
+    return axios.put(`${baseUrl}/${id}`,changednum)
+}
 const communications = {
     getAll,
     create,
-    remove
+    remove,
+    modify
 }
 
 export default communications
