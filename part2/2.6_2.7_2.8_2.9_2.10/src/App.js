@@ -46,7 +46,6 @@ const App = () => {
         setTimeout(() => {
           setNotify(null)
         }, 5000)
-        //todo add setNotification
       })
     } else {
       if (window.confirm (`${newName} is already added to phonebook do you want to modify the number`)) {
@@ -56,8 +55,6 @@ const App = () => {
         console.log(persons[ind].name);
         console.log(persons[ind].id);
         const id = persons[ind].id
-        // communications.modify(id)
-        // .then(response => console.log(response))
         const phonenum = persons.find(person => person.id === id)
         const changednum = {...phonenum,phone : newPhone}
         communications.modify(id,changednum)
@@ -77,12 +74,6 @@ const App = () => {
           console.log(response);
           setPersons(response)
           })
-        // communications.getAll()
-        // .then(response => {
-        // console.log(response);
-        // setPersons(response)
-        // })
-        // communications.modify(id)
       }
       else{
         console.log('not confirm');
