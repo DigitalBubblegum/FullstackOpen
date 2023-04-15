@@ -3,6 +3,7 @@ import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Person from "./components/Person";
 import communications from "./services/communications";
+import Notification from "./components/Notification";
 const App = () => {
   //states
   const [persons, setPersons] = useState([]) 
@@ -10,6 +11,7 @@ const App = () => {
   const [newPhone, setNewPhone] = useState('')
   const [newFilter, setNewFilter] = useState('')
   const [showAll, setShowAll] = useState(true)
+  const [notify, setNotify] = useState(null)
   //effects
   const hook = () => {
     console.log('effect');
@@ -40,6 +42,11 @@ const App = () => {
         setPersons(persons.concat(returnedPerson))
         setNewName('')
         setNewPhone('')
+        setNotify('Added '+returnedPerson.name)
+        setTimeout(() => {
+          setNotify(null)
+        }, 5000)
+        //todo add setNotification
       })
     } else {
       if (window.confirm (`${newName} is already added to phonebook do you want to modify the number`)) {
@@ -57,6 +64,19 @@ const App = () => {
         .then(response => {
           setPersons(persons.map(person => person.id !== id ? person : response.data))
         })
+        .catch(error => {
+          setNotify(
+          `Information of '${newName}' has already been removed from server`
+        )
+        setTimeout(() => {
+          setNotify(null)
+        }, 5000)
+        })
+         communications.getAll()
+          .then(response =>{
+          console.log(response);
+          setPersons(response)
+          })
         // communications.getAll()
         // .then(response => {
         // console.log(response);
@@ -112,6 +132,7 @@ const App = () => {
     <div>
       <Filter newFilter = {newFilter} handleFilterChange = {handleFilterChange} showAll = {showAll} setShowAll = {setShowAll}/>
       <PersonForm addPerson = {addPerson} newName = {newName} handleNameChange = {handleNameChange} newPhone = {newPhone} handlePhoneChange = {handlePhoneChange}/>
+      <Notification message={notify}/>
       <Person personsToShow = {personsToShow} handleDelete = {handleDelete}/>
     </div>
   )
