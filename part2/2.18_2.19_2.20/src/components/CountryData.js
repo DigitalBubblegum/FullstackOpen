@@ -11,13 +11,20 @@ const CountryData = ({returnedCountry}) => {
   }
   else{
     console.log(returnedCountry.flags.png)
+    console.log(returnedCountry.languages)
+    
     return (
         <div>
           <h2>Official Name - {returnedCountry.name.official}</h2>
           <h3>Common Name - {returnedCountry.name.common}</h3>
           <p>Area - {returnedCountry.area}</p>
           <p>Capital - {returnedCountry.capital}</p>
-          <img src = {returnedCountry.flags.png}></img>
+          <p>Languages</p>
+          <ol>
+          {/* display languages from countries */}
+          </ol>
+          <img src = {returnedCountry.flags.png} alt = {returnedCountry.flags.alt}></img>
+          
         </div>
     )
   }

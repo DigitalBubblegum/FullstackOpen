@@ -18,7 +18,11 @@ function App() {
       setReturnedCountry(response[0])
     })
   }
-
+  const handleLanguages = () => {
+    for (const [key,value] of Object.entries(returnedCountry.languages)) {
+      console.log(`${value}`);
+    }
+  }
   console.log(returnedCountry);
   return (
     <div className="App">
