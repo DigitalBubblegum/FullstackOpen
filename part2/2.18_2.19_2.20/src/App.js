@@ -4,7 +4,7 @@ import CountryData from './components/CountryData';
 function App() {
   //state
   const [form, setForm] = useState('enter a country')
-  // const [countryInfo, setCountryInfo] = useState('country information')
+  
   const [returnedCountry, setReturnedCountry] = useState([])
   //function
   const handleFormChange = (event) => {
@@ -16,8 +16,6 @@ function App() {
     countriesService.findCountries(form.toLowerCase())
       .then(response => {
       setReturnedCountry(response[0])
-      // const name = response[0].name.official
-      // setCountryInfo(name)
     })
   }
 
@@ -31,8 +29,6 @@ function App() {
                 <input value={form} onChange={handleFormChange} onClick={()=>setForm('')}/>
                 <button type = "submit">save</button>
       </form>
-      {/* <button onClick={handleFetchAll}>fetch all</button> */}
-      {/* <h2>{countryInfo}</h2> */}
       <CountryData returnedCountry ={returnedCountry}/>
     </div>
   );
