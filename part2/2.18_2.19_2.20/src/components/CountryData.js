@@ -1,4 +1,4 @@
-const CountryData = ({returnedCountry}) => {
+const CountryData = ({returnedCountry,handleLanguages}) => {
   // console.log(returnedCountry.name.common);
   console.log('size of array is ' + returnedCountry.length);
   console.log(returnedCountry);
@@ -21,7 +21,8 @@ const CountryData = ({returnedCountry}) => {
           <p>Capital - {returnedCountry.capital}</p>
           <p>Languages</p>
           <ol>
-          {/* display languages from countries */}
+            {/* <li>{()=>handleLanguages}</li> */}
+            {/* todo fix languages  */}
           </ol>
           <img src = {returnedCountry.flags.png} alt = {returnedCountry.flags.alt}></img>
           
