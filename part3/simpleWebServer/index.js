@@ -35,6 +35,12 @@ app.get("/api/notes/:id", (request, response) => {
     response.status(404).send("<h1>404 not found</h1>").end();
   }
 });
+app.delete('/api/notes/:id',(request,response)=>{
+  const id = Number(request.params.id)
+  notes.filter(note=>note.id!=id)
+  response.status(204).end()
+  console.log('deleted');
+})
 const PORT = 3001
 app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
