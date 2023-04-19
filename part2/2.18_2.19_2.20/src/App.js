@@ -18,15 +18,6 @@ function App() {
       setReturnedCountry(response[0])
     })
   }
-  const handleLanguages = () => {
-    const langArray = [];
-    for (const [key,value] of Object.entries(returnedCountry.languages)) {
-      console.log(`${value}`);
-      langArray.push(value)
-    }
-    console.log(langArray);
-    return langArray
-  }
   console.log(returnedCountry);
   return (
     <div className="App">
@@ -37,7 +28,7 @@ function App() {
                 <input value={form} onChange={handleFormChange} onClick={()=>setForm('')}/>
                 <button type = "submit">save</button>
       </form>
-      <CountryData returnedCountry ={returnedCountry} handleLanguages = {handleLanguages}/>
+      <CountryData returnedCountry ={returnedCountry}/>
     </div>
   );
 }
