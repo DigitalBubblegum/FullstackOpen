@@ -20,6 +20,9 @@ let notes = [
 app.get('/',(request,response)=>{
   response.send('<h1>hello world</h1>')
 })
+app.get("/new", (request, response) => {
+  response.send("<h1>hello new</h1>");
+});
 app.get('/api/notes',(request,response) => {
   response.json(notes)
 })
