@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 
-app.use = (express.json)
+app.use(express.json());
 
 let persons = [
   {
@@ -25,6 +25,13 @@ let persons = [
     number: "39-23-6423122",
   },
 ];
+
+//functions
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
+}
 
 app.get('/info',(request,response)=>{
     const length = persons.length
@@ -54,6 +61,36 @@ app.delete("/api/persons/:id",(request, response)=>{
     persons.filter((person) => person.id != id);
     response.status(404).end();
     console.log("deleted");
+});
+//add a number
+app.post("/api/persons", (request, response) => {
+  const body = request.body;
+  console.log(body);
+  if (!body.name) {
+    return response.status(400).json({
+      error: "name missing",
+    });
+  }
+  if (!body.number) {
+    return response.status(400).json({
+      error: "number missing",
+    });
+  }
+
+  const person = {
+    id: getRandomIntInclusive(0, 1000000000000),
+    name: body.name,
+    number: body.number,
+  };
+
+  persons = persons.concat(person);
+
+  response.json(person);
+
+
+// const person = request.body
+// console.log(person);
+// response.json(person);
 });
 const PORT = 3001;
 app.listen(PORT);
