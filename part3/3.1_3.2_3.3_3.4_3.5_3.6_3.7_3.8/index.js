@@ -1,8 +1,11 @@
 const express = require('express')
+var morgan = require("morgan");
 const app = express()
-
+app.use(
+  morgan(":method :url :status :response-time ms - :res[content-length]")
+);
 app.use(express.json());
-
+// app.use(morgan)
 let persons = [
   {
     id: 1,
@@ -89,7 +92,6 @@ app.post("/api/persons", (request, response) => {
     };
 
     persons = persons.concat(person);
-
     response.json(person);
   }
 });
