@@ -77,20 +77,21 @@ app.post("/api/persons", (request, response) => {
     });
   }
 
-  const person = {
-    id: getRandomIntInclusive(0, 1000000000000),
-    name: body.name,
-    number: body.number,
-  };
+  if (persons.map((person) => person.name).includes(body.name)) {
+    return response.status(400).json({
+      error: "name must be unique",
+    });
+  } else {
+    const person = {
+      id: getRandomIntInclusive(0, 1000000000000),
+      name: body.name,
+      number: body.number,
+    };
 
-  persons = persons.concat(person);
+    persons = persons.concat(person);
 
-  response.json(person);
-
-
-// const person = request.body
-// console.log(person);
-// response.json(person);
+    response.json(person);
+  }
 });
 const PORT = 3001;
 app.listen(PORT);
