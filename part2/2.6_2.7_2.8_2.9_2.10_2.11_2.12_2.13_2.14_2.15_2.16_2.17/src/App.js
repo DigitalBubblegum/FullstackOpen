@@ -107,11 +107,11 @@ const App = () => {
       communications.remove(id)
         .then(response =>{
         console.log(response)
-      communications.getAll()
-        .then(response => {
-        console.log(response);
-        setPersons(response)
-        })
+      // communications.getAll()
+      //   .then(response => {
+      //   console.log(response);
+      //   setPersons(response)
+      //   })
       })
     }
     else{
