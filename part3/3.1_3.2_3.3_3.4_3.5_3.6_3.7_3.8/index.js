@@ -1,10 +1,10 @@
-const express = require('express')
+const express = require("express");
 var morgan = require("morgan");
-const app = express()
+const app = express();
 
-morgan.token('mes', function getMes(request) {
+morgan.token("mes", function getMes(request) {
   return JSON.stringify(request.body);
-})
+});
 app.use(
   morgan(":method :url :status :response-time ms - :res[content-length] :mes")
 );
@@ -41,34 +41,34 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
 }
 
-app.get('/info',(request,response)=>{
-    const length = persons.length
-    const currDate = new Date();
-    console.log(currDate);
-    response.send(
-      `<p>phonebook has info for ${length} people</p><br><p>${currDate}</p>`
-    );
-})
+app.get("/info", (request, response) => {
+  const length = persons.length;
+  const currDate = new Date();
+  console.log(currDate);
+  response.send(
+    `<p>phonebook has info for ${length} people</p><br><p>${currDate}</p>`
+  );
+});
 //view all
 app.get("/api/persons", (request, response) => {
   response.json(persons);
 });
 //view by id
-app.get("/api/persons/:id",(request,response)=>{
-    const id = Number(request.params.id)
-    const person = persons.find(person=>(person.id===id))
-    if (person) {
+app.get("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+  const person = persons.find((person) => person.id === id);
+  if (person) {
     response.json(person);
-    } else {
+  } else {
     response.status(404).send("<h1>404 not found</h1>").end();
-    }
-})
+  }
+});
 //delete by id
-app.delete("/api/persons/:id",(request, response)=>{
-    const id = Number(request.params.id)
-    persons.filter((person) => person.id != id);
-    response.status(404).end();
-    console.log("deleted");
+app.delete("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+  persons.filter((person) => person.id != id);
+  response.status(404).end();
+  console.log("deleted");
 });
 //add a number
 app.post("/api/persons", (request, response) => {
