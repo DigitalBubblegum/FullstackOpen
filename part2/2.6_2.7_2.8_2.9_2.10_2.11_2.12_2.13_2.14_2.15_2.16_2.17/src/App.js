@@ -13,15 +13,18 @@ const App = () => {
   const [showAll, setShowAll] = useState(true)
   const [notify, setNotify] = useState(null)
   //effects
+  const fetchPersons = () => {
+    communications.getAll().then((response) => {
+      console.log(response);
+      setPersons(response);
+      });
+  }
   const hook = () => {
     console.log('effect');
-    communications.getAll()
-    .then(response =>{
-      console.log(response);
-      setPersons(response)
-    })
+    fetchPersons();
   }
   useEffect(hook,[])
+  console.log("render", persons.length, "persons");
   //functions
   const personsToShow = showAll
     ? persons
@@ -69,11 +72,11 @@ const App = () => {
           setNotify(null)
         }, 5000)
         })
-         communications.getAll()
-          .then(response =>{
-          console.log(response);
-          setPersons(response)
-          })
+        //  communications.getAll()
+        //   .then(response =>{
+        //   console.log(response);
+        //   setPersons(response)
+        //   })
       }
       else{
         console.log('not confirm');
@@ -107,12 +110,14 @@ const App = () => {
       communications.remove(id)
         .then(response =>{
         console.log(response)
+        fetchPersons();
       // communications.getAll()
       //   .then(response => {
       //   console.log(response);
       //   setPersons(response)
       //   })
       })
+      // communications.getAll()
     }
     else{
       console.log('denied');
