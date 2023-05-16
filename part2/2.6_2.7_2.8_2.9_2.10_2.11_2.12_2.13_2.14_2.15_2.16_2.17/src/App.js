@@ -55,16 +55,19 @@ const App = () => {
         console.log('modifying the number');
         // console.log(persons.map((person)=>person.name).findIndex(element => element === newName));
         const ind = persons.map((person)=>person.name).findIndex(element => element === newName)
-        console.log(persons[ind].name);
-        console.log(persons[ind].id);
+        // console.log(persons[ind].name);
+        // console.log(persons[ind].id);
         const id = persons[ind].id
         const phonenum = persons.find(person => person.id === id)
         const changednum = {...phonenum,phone : newPhone}
+        // console.log(changednum);
         communications.modify(id,changednum)
         .then(response => {
-          setPersons(persons.map(person => person.id !== id ? person : response.data))
+          // setPersons(persons.map(person => person.id !== id ? person : response.data))
+          fetchPersons();
         })
         .catch(error => {
+          console.log(error.message);
           setNotify(
           `Information of '${newName}' has already been removed from server`
         )
