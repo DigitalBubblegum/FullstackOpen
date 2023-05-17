@@ -39,27 +39,25 @@ const App = () => {
         name: newName,
         phone: newPhone,
       }
-      communications.create(numberObject)
-      .then(returnedPerson => {
-        console.log('successfully created new entry in DB');
-        setPersons(persons.concat(returnedPerson))
-        setNewName('')
-        setNewPhone('')
-        setNotify('Added '+returnedPerson.name)
-        setTimeout(() => {
-          setNotify(null);
-        }, 5000).catch((error) => {
-          console.log(error.message);
-          setNotify(
-            `Information of '${newName}' has already been removed from server`
-          );
+      communications
+        .create(numberObject)
+        .then((returnedPerson) => {
+          console.log("successfully created new entry in DB");
+          setPersons(persons.concat(returnedPerson));
+          setNewName("");
+          setNewPhone("");
+          setNotify("Added " + returnedPerson.name);
           setTimeout(() => {
             setNotify(null);
           }, 5000);
-          ////////////////////////
-          ////////ebdfudeswvfiuyerwvfiuyev
+        })
+        .catch((error) => {
+          console.log(error.response.data.error);
+          setNotify(error.response.data.error);
+          setTimeout(() => {
+            setNotify(null);
+          }, 5000);
         });
-      })
     } else {
       if (window.confirm (`${newName} is already added to phonebook do you want to modify the number`)) {
         console.log('modifying the number');
