@@ -47,8 +47,18 @@ const App = () => {
         setNewPhone('')
         setNotify('Added '+returnedPerson.name)
         setTimeout(() => {
-          setNotify(null)
-        }, 5000)
+          setNotify(null);
+        }, 5000).catch((error) => {
+          console.log(error.message);
+          setNotify(
+            `Information of '${newName}' has already been removed from server`
+          );
+          setTimeout(() => {
+            setNotify(null);
+          }, 5000);
+          ////////////////////////
+          ////////ebdfudeswvfiuyerwvfiuyev
+        });
       })
     } else {
       if (window.confirm (`${newName} is already added to phonebook do you want to modify the number`)) {
