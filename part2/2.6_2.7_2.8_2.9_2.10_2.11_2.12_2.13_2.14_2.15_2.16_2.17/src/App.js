@@ -61,17 +61,12 @@ const App = () => {
     } else {
       if (window.confirm (`${newName} is already added to phonebook do you want to modify the number`)) {
         console.log('modifying the number');
-        // console.log(persons.map((person)=>person.name).findIndex(element => element === newName));
         const ind = persons.map((person)=>person.name).findIndex(element => element === newName)
-        // console.log(persons[ind].name);
-        // console.log(persons[ind].id);
         const id = persons[ind].id
         const phonenum = persons.find(person => person.id === id)
         const changednum = {...phonenum,phone : newPhone}
-        // console.log(changednum);
         communications.modify(id,changednum)
         .then(response => {
-          // setPersons(persons.map(person => person.id !== id ? person : response.data))
           fetchPersons();
         })
         .catch(error => {
@@ -83,11 +78,6 @@ const App = () => {
           setNotify(null)
         }, 5000)
         })
-        //  communications.getAll()
-        //   .then(response =>{
-        //   console.log(response);
-        //   setPersons(response)
-        //   })
       }
       else{
         console.log('not confirm');
@@ -122,13 +112,7 @@ const App = () => {
         .then(response =>{
         console.log(response)
         fetchPersons();
-      // communications.getAll()
-      //   .then(response => {
-      //   console.log(response);
-      //   setPersons(response)
-      //   })
       })
-      // communications.getAll()
     }
     else{
       console.log('denied');
