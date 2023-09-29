@@ -68,7 +68,9 @@ const toggleImportanceOf = id => {
       const user = await loginService.login({
         username,
         password,
-      });
+      })
+      //setting user token here
+      noteService.setToken(user.token)
       setUser(user);
       setUsername("");
       setPassword("");
