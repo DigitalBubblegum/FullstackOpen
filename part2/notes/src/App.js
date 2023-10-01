@@ -1,8 +1,10 @@
 import {useState,useEffect} from 'react'
 import Note from './components/Note'
 import noteService from './services/notes'
+// import LoginForm from './components/LoginForm';
 import Notification from "./components/Notification";
 import loginService from './services/login'
+import LoginForm from './components/LoginForm';
 const App = (props) => {
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('a new note...')
@@ -52,6 +54,18 @@ const toggleImportanceOf = id => {
     console.log(event.target.value);
     setNewNote(event.target.value)
   }
+
+  const handleUsernameChange = (event) => {
+    console.log(event.target.value)
+    setUsername(event.target.value);
+  }
+
+  const handlePasswordChange = (event) => {
+    console.log(event.target.value);
+    setPassword(event.target.value);
+  };
+
+
   const notesToShow = showAll
     ? notes
     : notes.filter(note => note.important === true)
@@ -95,27 +109,6 @@ const toggleImportanceOf = id => {
     window.localStorage.removeItem("loggedNoteAppUser")
     window.location.reload()
   }
-  const loginForm = () => (<form onSubmit={handleLogin}>
-        <div>
-          username
-          <input
-            type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
-          />
-        </div>
-        <div>
-          password
-          <input
-            type="password"
-            value={password}
-            name="password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
-        </div>
-        <button type='submit'>login</button>
-      </form>)
   const noteForm = () => (
     <form onSubmit={addNote}>
       <input value={newNote} onChange={handleNoteChange} />
@@ -127,7 +120,13 @@ const toggleImportanceOf = id => {
       <h1>Notes</h1>
       <Notification message={errorMessage} />
       {user === null ? (
-        loginForm()
+        <LoginForm
+          handleLogin={handleLogin}
+          username={username}
+          password={password}
+          handleUsernameChange={handleUsernameChange}
+          handlePasswordChange={handlePasswordChange}
+        />
       ) : (
         <div>
           <p>{user.name} logged in</p>
