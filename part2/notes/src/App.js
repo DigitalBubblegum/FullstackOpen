@@ -4,7 +4,9 @@ import noteService from './services/notes'
 // import LoginForm from './components/LoginForm';
 import Notification from "./components/Notification";
 import loginService from './services/login'
+import Togglable from './components/Togglable'
 import LoginForm from './components/LoginForm';
+import NoteForm from './components/NoteForm'
 const App = (props) => {
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('a new note...')
@@ -109,12 +111,6 @@ const toggleImportanceOf = id => {
     window.localStorage.removeItem("loggedNoteAppUser")
     window.location.reload()
   }
-  const noteForm = () => (
-    <form onSubmit={addNote}>
-      <input value={newNote} onChange={handleNoteChange} />
-      <button type="submit">save</button>
-    </form>
-  );
   return (
     <div>
       <h1>Notes</h1>
@@ -131,7 +127,14 @@ const toggleImportanceOf = id => {
         <div>
           <p>{user.name} logged in</p>
           <button onClick={handleLogOut}>logout</button>
-          {noteForm()}
+          {/* {noteForm()} */}
+          <Togglable buttonLabel="new note">
+            <NoteForm
+              onSubmit={addNote}
+              value={newNote}
+              handleChange={handleNoteChange}
+            />
+          </Togglable>
         </div>
       )}
       <div>
