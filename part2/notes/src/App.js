@@ -116,13 +116,15 @@ const toggleImportanceOf = id => {
       <h1>Notes</h1>
       <Notification message={errorMessage} />
       {user === null ? (
-        <LoginForm
-          handleLogin={handleLogin}
-          username={username}
-          password={password}
-          handleUsernameChange={handleUsernameChange}
-          handlePasswordChange={handlePasswordChange}
-        />
+        <Togglable buttonLabel = 'Login'>
+          <LoginForm
+            handleLogin={handleLogin}
+            username={username}
+            password={password}
+            handleUsernameChange={handleUsernameChange}
+            handlePasswordChange={handlePasswordChange}
+          />
+        </Togglable>
       ) : (
         <div>
           <p>{user.name} logged in</p>
