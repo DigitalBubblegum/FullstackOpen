@@ -1,11 +1,11 @@
 import {useState,useEffect} from 'react'
 import Note from './components/Note'
 import noteService from './services/notes'
+// import LoginForm from './components/LoginForm';
 import Notification from "./components/Notification";
 import loginService from './services/login'
 import LoginForm from './components/LoginForm';
 const App = (props) => {
-  const [loginVisible, setLoginVisible] = useState(false)
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('a new note...')
   const [showAll, setShowAll] = useState(true)
@@ -109,29 +109,6 @@ const toggleImportanceOf = id => {
     window.localStorage.removeItem("loggedNoteAppUser")
     window.location.reload()
   }
-  const loginForm = () =>{
-    const hideWhenVisible = { display: loginVisible ? "none" : "" };
-    const showWhenVisible = { display: loginVisible ? "" : "none" };
-    return (
-      <div>
-        <div style={hideWhenVisible}>
-          {console.log(loginVisible)}
-          <button onClick={() => setLoginVisible(true)}>log in</button>
-        </div>
-        <div style={showWhenVisible}>
-          {console.log(loginVisible)}
-          <LoginForm
-            username={username}
-            password={password}
-            handleUsernameChange={handleUsernameChange}
-            handlePasswordChange={handlePasswordChange}
-            handleSubmit={handleLogin}
-          />
-          <button onClick={() => setLoginVisible(false)}>cancel</button>
-        </div>
-      </div>
-    );
-  }
   const noteForm = () => (
     <form onSubmit={addNote}>
       <input value={newNote} onChange={handleNoteChange} />
@@ -143,7 +120,13 @@ const toggleImportanceOf = id => {
       <h1>Notes</h1>
       <Notification message={errorMessage} />
       {user === null ? (
-        loginForm()
+        <LoginForm
+          handleLogin={handleLogin}
+          username={username}
+          password={password}
+          handleUsernameChange={handleUsernameChange}
+          handlePasswordChange={handlePasswordChange}
+        />
       ) : (
         <div>
           <p>{user.name} logged in</p>
