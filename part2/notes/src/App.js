@@ -1,7 +1,6 @@
 import {useState,useEffect} from 'react'
 import Note from './components/Note'
 import noteService from './services/notes'
-// import LoginForm from './components/LoginForm';
 import Notification from "./components/Notification";
 import loginService from './services/login'
 import Togglable from './components/Togglable'
@@ -52,10 +51,10 @@ const toggleImportanceOf = id => {
     setNotes(notes.filter(n => n.id !== id))
   })
 }
-  const handleNoteChange = (event) => {
-    console.log(event.target.value);
-    setNewNote(event.target.value)
-  }
+  // const handleNoteChange = (event) => {
+  //   console.log(event.target.value);
+  //   setNewNote(event.target.value)
+  // }
 
   const handleUsernameChange = (event) => {
     console.log(event.target.value)
@@ -72,14 +71,7 @@ const toggleImportanceOf = id => {
     ? notes
     : notes.filter(note => note.important === true)
 
-  const addNote = (event) => {
-    event.preventDefault()
-    console.log('button clicked', event.target);
-    const noteObject = {
-      content: newNote,
-      important: Math.random() < 0.5,
-      // id: notes.length + 1,
-    }
+  const addNote = (noteObject) => {
     noteService.create(noteObject)
           .then(returnedNote => {
         setNotes(notes.concat(returnedNote))
@@ -132,9 +124,7 @@ const toggleImportanceOf = id => {
           {/* {noteForm()} */}
           <Togglable buttonLabel="new note">
             <NoteForm
-              onSubmit={addNote}
-              value={newNote}
-              handleChange={handleNoteChange}
+              createNote={addNote}
             />
           </Togglable>
         </div>
