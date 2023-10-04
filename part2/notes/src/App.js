@@ -71,6 +71,11 @@ const toggleImportanceOf = id => {
     noteService.create(noteObject)
           .then(returnedNote => {
         setNotes(notes.concat(returnedNote))
+      }).catch(error => {
+        setErrorMessage(error.response.data.error);
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 5000);
       })
   }
   const handleLogin = async (event) => {
