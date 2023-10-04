@@ -8,7 +8,6 @@ import LoginForm from './components/LoginForm';
 import NoteForm from './components/NoteForm'
 const App = (props) => {
   const [notes, setNotes] = useState([])
-  const [newNote, setNewNote] = useState('a new note...')
   const [showAll, setShowAll] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('')
@@ -75,7 +74,7 @@ const toggleImportanceOf = id => {
     noteService.create(noteObject)
           .then(returnedNote => {
         setNotes(notes.concat(returnedNote))
-            setNewNote('Add a new note')
+            // setNewNote('Add a new note')
           })
   }
   const handleLogin = async (event) => {
