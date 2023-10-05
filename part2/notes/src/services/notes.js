@@ -1,5 +1,5 @@
-import axios from "axios";
-const baseUrl = "http://localhost:3001/api/notes";
+import axios from 'axios'
+const baseUrl = 'http://localhost:3001/api/notes'
 
 let token = null
 
@@ -13,7 +13,7 @@ const getAll = () => {
 }
 
 const create = async newObject => {
-  const config = { headers: {Authorization: token}}
+  const config = { headers: { Authorization: token } }
   console.log(config)
   const response = await axios.post(baseUrl,newObject,config)
   console.log(response)
@@ -26,10 +26,10 @@ const update = (id, newObject) => {
 }
 
 const noteService = {
-    getAll: getAll,
-    create: create,
-    update: update,
-    setToken: setToken
+  getAll: getAll,
+  create: create,
+  update: update,
+  setToken: setToken
 }
 
 export default noteService

@@ -1,10 +1,10 @@
-import {useState,useEffect,useRef} from 'react'
+import { useState,useEffect,useRef } from 'react'
 import Note from './components/Note'
 import noteService from './services/notes'
-import Notification from "./components/Notification";
+import Notification from './components/Notification'
 import loginService from './services/login'
 import Togglable from './components/Togglable'
-import LoginForm from './components/LoginForm';
+import LoginForm from './components/LoginForm'
 import NoteForm from './components/NoteForm'
 const App = (props) => {
   const [notes, setNotes] = useState([])
@@ -15,7 +15,7 @@ const App = (props) => {
   const [user, setUser] = useState(null)
   const noteFormRef = useRef()
   //effects
-    useEffect(() => {
+  useEffect(() => {
     console.log('effect')
     noteService.getAll()
       .then(initialNotes => {
@@ -32,34 +32,34 @@ const App = (props) => {
       noteService.setToken(user.token)
     }
   }, [])
-  
+
   console.log('render', notes.length, 'notes')
   //functions
-const toggleImportanceOf = id => {
-  const note = notes.find(n => n.id === id)
-  const changedNote = { ...note, important: !note.important }
-  noteService.update(id,changedNote).then(returnedNote => {
-        setNotes(notes.map(note => note.id !== id ? note : returnedNote))
-  })
-  .catch(error => {
-    setErrorMessage(
+  const toggleImportanceOf = id => {
+    const note = notes.find(n => n.id === id)
+    const changedNote = { ...note, important: !note.important }
+    noteService.update(id,changedNote).then(returnedNote => {
+      setNotes(notes.map(note => note.id !== id ? note : returnedNote))
+    })
+      .catch(error => {
+        setErrorMessage(
           `Note '${note.content}' was already removed from server`
         )
         setTimeout(() => {
           setErrorMessage(null)
         }, 5000)
-    setNotes(notes.filter(n => n.id !== id))
-  })
-}
+        setNotes(notes.filter(n => n.id !== id))
+      })
+  }
   const handleUsernameChange = (event) => {
     console.log(event.target.value)
-    setUsername(event.target.value);
+    setUsername(event.target.value)
   }
 
   const handlePasswordChange = (event) => {
-    console.log(event.target.value);
-    setPassword(event.target.value);
-  };
+    console.log(event.target.value)
+    setPassword(event.target.value)
+  }
 
 
   const notesToShow = showAll
@@ -69,17 +69,17 @@ const toggleImportanceOf = id => {
   const addNote = (noteObject) => {
     noteFormRef.current.toggleVisibility()
     noteService.create(noteObject)
-          .then(returnedNote => {
+      .then(returnedNote => {
         setNotes(notes.concat(returnedNote))
       }).catch(error => {
-        setErrorMessage(error.response.data.error);
+        setErrorMessage(error.response.data.error)
         setTimeout(() => {
-          setErrorMessage(null);
-        }, 5000);
+          setErrorMessage(null)
+        }, 5000)
       })
   }
   const handleLogin = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     console.log('logging in with',username, password)
     try {
       const user = await loginService.login({
@@ -89,18 +89,18 @@ const toggleImportanceOf = id => {
       window.localStorage.setItem('loggedNoteAppUser',JSON.stringify(user))
       //setting user token here
       noteService.setToken(user.token)
-      setUser(user);
-      setUsername("");
-      setPassword("");
+      setUser(user)
+      setUsername('')
+      setPassword('')
     } catch (exception) {
-      setErrorMessage("Wrong credentials");
+      setErrorMessage('Wrong credentials')
       setTimeout(() => {
-        setErrorMessage(null);
-      }, 5000);
+        setErrorMessage(null)
+      }, 5000)
     }
-  };
-  const handleLogOut = () =>{
-    window.localStorage.removeItem("loggedNoteAppUser")
+  }
+  const handleLogOut = () => {
+    window.localStorage.removeItem('loggedNoteAppUser')
     window.location.reload()
   }
   return (
@@ -132,7 +132,7 @@ const toggleImportanceOf = id => {
       )}
       <div>
         <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? "important" : "all"}
+          show {showAll ? 'important' : 'all'}
         </button>
       </div>
       <ul>
@@ -145,7 +145,7 @@ const toggleImportanceOf = id => {
         ))}
       </ul>
     </div>
-  );
+  )
 }
 
 export default App

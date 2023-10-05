@@ -28,13 +28,13 @@ const LoginForm = ({
       </div>
       <button type="submit">login</button>
     </form>
-  );
-};
+  )
+}
 LoginForm.propTypes = {
-  handleLogin:PropTypes.func.isRequired,
-  username:PropTypes.func.isRequired,
-  password:PropTypes.func.isRequired,
-  handleUsernameChange:PropTypes.string.isRequired,
-  handlePasswordChange:PropTypes.string.isRequired,
-};
+  handleUsernameChange: PropTypes.func.isRequired,
+  handlePasswordChange: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
+  password : PropTypes.string.isRequired,
+}
 export default LoginForm
