@@ -127,6 +127,7 @@ const toggleImportanceOf = id => {
               createNote={addNote}
             />
           </Togglable>
+          <Togglable buttonLabel = 'proptest'>hi</Togglable>
         </div>
       )}
       <div>
