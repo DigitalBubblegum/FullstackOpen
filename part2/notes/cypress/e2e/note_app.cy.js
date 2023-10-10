@@ -11,6 +11,7 @@ describe('Note app', function() {
     cy.get('#username').type('testUser')
     cy.get('#password').type('123456789')
     cy.get('#login-button').click()
+    cy.contains('test logged in')
   })
   it('user can logout',function () {
     cy.contains('Login').click()
