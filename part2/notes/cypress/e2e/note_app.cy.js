@@ -14,7 +14,11 @@ describe('Note app', function() {
     cy.contains('test logged in')
   })
   it('user can create a new note after a successul login',function () {
+    cy.contains('test logged in')
     cy.contains('new note').click()
+    cy.get('#submit-form').type('a note created by cypress')
+    cy.contains('save').click()
+    cy.contains('a note created by cypress')
   })
   it('user can logout',function () {
     cy.contains('logout').click()
